@@ -19,6 +19,7 @@ t_Jan_Nettig_project_SQL_secondary_final - https://github.com/nettigj/engeto-sql
 https://github.com/nettigj/engeto-sql-project/blob/e64d76ec1f24afa8d7a57e56a2e8d158b2e3c0f0/1%20-%20question
    
 2. How many litres of milk and kilograms of bread can be bought in the first and last comparable period in the available price and wage data?
+https://github.com/nettigj/engeto-sql-project/blob/fb6f187e7d3e5b6358b03e03aeb05a6e16342876/2%20-%20question
 
 3. Which food category is becoming more expensive at the slowest rate (lowest percentage increase year-on-year)?
 
