@@ -6,15 +6,11 @@ Some basics SELECT, INSERT INTO, WHERE, AND, OR, ORDER BY, CASE Expression, LIKE
 Backup & Restore, SUM() + MAX() and other aggregation functions, GROUP BY, SELECT operations
 Database schema, joining tables using different variants of JOIN, set operations (e.g. UNION, EXCEPT, ...), Common Table Expressions
 
-Project Structure
-- documentation
-- files with answers answer1.sql
-- files with tabler primary.sql
 
-
-##Primary table
-
-##Secondary table 
+Primary table
+t_Jan_Nettig_project_SQL_primary_final - https://github.com/nettigj/engeto-sql-project/blob/0724a6d6e7c3beeba00f1fdb1f5ce33d9ee9fa57/t_Jan_Nettig_project_SQL_primary_final
+Secondary table 
+t_Jan_Nettig_project_SQL_secondary_final - https://github.com/nettigj/engeto-sql-project/blob/0724a6d6e7c3beeba00f1fdb1f5ce33d9ee9fa57/t_Jan_Nettig_project_SQL_secondary_final
 
 
 # Answers to questions
