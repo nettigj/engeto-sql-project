@@ -1,0 +1,153 @@
+SELECT 
+*
+FROM 
+czechia_payroll cp JOIN czechia_payroll_industry_branch cpi
+ON industry_branch_code = code;
+
+
+CREATE TABLE pomocna_tabulka_prum_odv1 AS
+(SELECT
+*
+FROM
+czechia_payroll cp JOIN czechia_payroll_industry_branch cpi
+ON industry_branch_code = code);
+
+
+SELECT 
+ROUND(AVG(value),0)average_wage,value_type_code, calculation_code, industry_branch_code, payroll_year, name 
+FROM 
+pomocna_tabulka_prum_odv1
+WHERE 
+(value_type_code = 5958 AND calculation_code = 200) AND payroll_year >=2006 AND payroll_year <= 2018
+GROUP BY 
+value_type_code, calculation_code, industry_branch_code, payroll_year, name 
+ORDER BY
+payroll_year DESC, average_wage DESC,industry_branch_code DESC;
+
+
+CREATE TABLE pomocna_tabulka_prum_odv2 AS
+(SELECT 
+ROUND(AVG(value),0)average_wage,value_type_code, calculation_code, industry_branch_code, payroll_year, name 
+FROM 
+pomocna_tabulka_prum_odv1
+WHERE 
+(value_type_code = 5958 AND calculation_code = 200) AND payroll_year  >=2006 AND payroll_year <= 2018
+GROUP BY 
+value_type_code , calculation_code, industry_branch_code, payroll_year, name 
+ORDER BY
+payroll_year DESC, average_wage DESC, industry_branch_code DESC);
+
+
+SELECT 
+p.*, LAG(average_wage)OVER(PARTITION BY industry_branch_code ORDER BY payroll_year),
+ROUND((((average_wage/LAG(average_wage)OVER(PARTITION BY industry_branch_code ORDER BY payroll_year))-1)*100),1)
+FROM
+pomocna_tabulka_prum_odv2 p
+ORDER BY
+p.payroll_year DESC, average_wage DESC;
+
+
+CREATE TABLE pomocna_mzdy1 AS 
+(SELECT
+p.*, LAG(average_wage)OVER(PARTITION BY industry_branch_code ORDER BY payroll_year)previous_year,
+ROUND((((average_wage/LAG(average_wage)OVER(PARTITION BY industry_branch_code ORDER BY payroll_year))-1)*100),1)
+interannual_percentage_difference
+FROM
+pomocna_tabulka_prum_odv2 p
+ORDER BY
+p.payroll_year DESC, average_wage DESC);
+
+
+SELECT
+*
+FROM
+czechia_price cp JOIN czechia_price_category c
+ON cp.category_code = c.code
+
+
+CREATE TABLE pomocna_potraviny1 AS
+(SELECT
+*
+FROM
+czechia_price cp JOIN czechia_price_category c
+ON cp.category_code = c.code);
+
+
+SELECT 
+AVG(value), name, extract(YEAR FROM date_from), region_code,category_code
+FROM 
+pomocna_potraviny1
+GROUP BY
+name, extract(YEAR FROM date_from), region_code, category_code
+ORDER BY
+extract(YEAR FROM date_from)DESC,region_code;
+
+
+CREATE TABLE pomocna_potraviny2 AS 
+(SELECT 
+ROUND(AVG(value),1)average, name, extract(YEAR FROM date_from)year, region_code,category_code
+FROM 
+pomocna_potraviny1
+GROUP BY
+name, extract(YEAR FROM date_from), region_code,category_code
+ORDER BY
+extract(YEAR FROM date_from)DESC,region_code);
+
+
+SELECT 
+ROUND(AVG(average),1)average_price, name, year, category_code
+FROM 
+pomocna_potraviny2
+GROUP BY
+year, name,category_code
+ORDER BY 
+year DESC;
+
+
+CREATE TABLE pomocna_potraviny3 AS 
+(SELECT 
+ROUND(AVG(average),1)average_price, name, year, category_code
+FROM 
+pomocna_potraviny2
+GROUP BY
+year, name,category_code
+ORDER BY 
+year DESC);
+
+
+SELECT 
+pp.*, LAG(average_price)OVER(PARTITION BY category_code ORDER BY year)average_price_last_year,
+ROUND((((average_price/LAG(average_price)OVER(PARTITION BY category_code ORDER BY year))-1)*100),1)
+interannual_percentage_difference_food
+FROM 
+pomocna_potraviny3 pp
+ORDER BY 
+category_code DESC,year DESC;
+
+
+CREATE TABLE pomocna_potraviny4 AS 
+(SELECT 
+pp.*, LAG(average_price)OVER(PARTITION BY category_code ORDER BY year)average_price_last_year,
+ROUND((((average_price/LAG(average_price)OVER(PARTITION BY category_code ORDER BY year))-1)*100),1)
+interannual_percentage_difference_food
+FROM 
+pomocna_potraviny3 pp
+ORDER BY 
+category_code DESC,year DESC);
+
+
+SELECT 
+p2.*, m.*
+FROM 
+pomocna_potraviny2 p2 JOIN pomocna_mzdy1 m
+ON p2.year = m.payroll_year;
+
+
+CREATE TABLE t_jan_nettig_project_SQL_primary_final AS
+(SELECT 
+p4.average_price, p4.name name_food, p4.year, p4.category_code, p4.average_price_last_year, 
+p4.interannual_percentage_difference_food,m.average_wage, m.industry_branch_code,m.payroll_year, m.name, m.previous_year,
+m.interannual_percentage_difference
+FROM 
+pomocna_potraviny4 p4 JOIN pomocna_mzdy1 m
+ON p4.year = m.payroll_year);
