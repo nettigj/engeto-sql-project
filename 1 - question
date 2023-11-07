@@ -1,0 +1,30 @@
+Final script:
+SELECT 
+name, ROUND(AVG(interannual_percentage_difference),1)average_wage_growth
+FROM 
+t_jan_nettig_project_SQL_primary_final
+GROUP BY
+name
+ORDER BY
+average_wage_growth;
+
+Result:
+Peněžnictví a pojišťovnictví	2.8
+Ostatní činnosti	3.1
+Administrativní a podpůrné činnosti	3.2
+Činnosti v oblasti nemovitostí	3.3
+Těžba a dobývání	3.5
+Doprava a skladování	3.7
+Zásobování vodou; činnosti související s odpady a sanacemi	3.7
+Informační a komunikační činnosti	3.9
+Vzdělávání	3.9
+Veřejná správa a obrana; povinné sociální zabezpečení	3.9
+Stavebnictví	3.9
+Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu	4.0
+Profesní, vědecké a technické činnosti	4.0
+Velkoobchod a maloobchod; opravy a údržba motorových vozidel	4.3
+Ubytování, stravování a pohostinství	4.4
+Zemědělství, lesnictví, rybářství	4.6
+Kulturní, zábavní a rekreační činnosti	4.6
+Zpracovatelský průmysl	4.7
+Zdravotní a sociální péče	5.0
