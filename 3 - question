@@ -1,0 +1,41 @@
+SELECT 
+ROUND(AVG(Sub.interannual_percentage_difference_food),1)price_increase,Sub.name_food
+FROM
+(SELECT 
+DISTINCT name_food,category_code, interannual_percentage_difference_food,year
+FROM 
+t_jan_nettig_project_SQL_primary_final)Sub
+GROUP BY
+Sub.name_food
+ORDER BY 
+price_increase;
+
+
+Price  Food
+-1.9	Cukr krystalový
+-0.7	Rajská jablka červená kulatá
+0.8	Banány žluté
+1.0	Vepřová pečeně s kostí
+1.0	Přírodní minerální voda uhličitá
+1.8	Šunkový salám
+2.0	Jablka konzumní
+2.2	Pečivo pšeničné bílé
+2.5	Hovězí maso zadní bez kosti
+2.6	Kapr živý
+2.7	Jakostní víno bílé
+2.9	Pivo výčepní, světlé, lahvové
+2.9	Eidamská cihla
+3.0	Mléko polotučné pasterované
+3.2	Rostlinný roztíratelný tuk
+3.4	Kuřata kuchaná celá
+3.6	Pomeranče
+4.0	Chléb konzumní kmínový
+4.0	Jogurt bílý netučný
+4.1	Konzumní brambory
+5.0	Rýže loupaná dlouhozrnná
+5.2	Pšeničná mouka hladká
+5.3	Mrkev
+5.3	Těstoviny vaječné
+5.5	Vejce slepičí čerstvá
+6.7	Máslo
+7.3	Papriky
