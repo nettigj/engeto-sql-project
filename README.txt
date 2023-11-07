@@ -20,6 +20,7 @@ Project Structure
 # Answers to questions
 
 1. Over the years have wages been rising in all sectors or falling in some of them?
+https://github.com/nettigj/engeto-sql-project/blob/e64d76ec1f24afa8d7a57e56a2e8d158b2e3c0f0/1%20-%20question
    
 2. How many litres of milk and kilograms of bread can be bought in the first and last comparable period in the available price and wage data?
 
