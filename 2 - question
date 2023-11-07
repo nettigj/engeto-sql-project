@@ -1,0 +1,14 @@
+SELECT 
+name_food,YEAR,AVG(average_wage)average_wage_year, FLOOR(AVG(average_wage)/average_price) amount
+FROM 
+t_jan_nettig_project_SQL_primary_final
+WHERE 
+(name_food LIKE 'Ml%' OR name_food LIKE 'Chl%') AND (year = 2006 OR year = 2018)
+GROUP BY 
+year,name_food;
+
+Food - Year - AVG wage - Amount
+Chléb konzumní kmínový	2006	21165.3158	1314.0
+Mléko polotučné pasterované	2006	21165.3158	1469.0
+Chléb konzumní kmínový	2018	33091.6316	1367.0
+Mléko polotučné pasterované	2018	33091.6316	1671.0
