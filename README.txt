@@ -1,5 +1,7 @@
 ENGETO SQL PROJECT
 ---------------------
+Discord : Honza N., mail - nettig.jan@seznam.cz
+
 Introduction:
 I would like to share with you my SQL project that was assigned in Data Academy. It uses all the knowledge that I learned during the SQL academy, especially: 
 Some basics SELECT, INSERT INTO, WHERE, AND, OR, ORDER BY, CASE Expression, LIKE and IN operators, nested SELECT, VIEWS
